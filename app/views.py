@@ -8,8 +8,9 @@ from .forms import PessoaForm
 def home(request):
     return render(request, 'home.html')
 
+#O browser recebe a mensagem diretamente da função(), por isso é importado o httpResponse.
 # def helloView(request):
-#     return HttpResponse('Olá, Django')
+#     return HttpResponse('Olá, Django') 
 
 def listarPessoas(request):
     pessoas = Pessoa.objects.all()
@@ -23,4 +24,22 @@ def criarPessoa(request):
             return redirect('listarPessoas')
     else:
         form = PessoaForm()
+    return render(request, 'create.html', {'pessoa': form})
+
+def deletarPessoa(request, pk):
+    pessoa = Pessoa.objects.get(pk=pk)
+    if request.method == 'POST':
+        pessoa.delete()
+        return redirect('listarPessoas')
+    return render(request, 'confirmarDelete.html', {'pessoa': pessoa})
+
+def atualizarPessoa(request, pk):
+    pessoa = Pessoa.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = PessoaForm(request.POST, instance=pessoa)
+        if form.is_valid():
+            form.save()
+            return redirect('listarPessoas')
+    else:
+        form = PessoaForm(instance=pessoa)
     return render(request, 'create.html', {'pessoa': form})

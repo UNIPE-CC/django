@@ -7,12 +7,19 @@
 </head>
 <body>
     <h1>Pessoas cadastradas</h1>
-    <ul>
+    <ol>
         {% for pessoa in pessoas %}
-        <li>{{pessoa.nome}}</li>
-        <li>{{pessoa.idade}}</li>
-        <li>{{pessoa.email}}</li>
+            <li>
+                <i>Nome: </i>{{pessoa.nome}}
+                <i>Idade: </i>{{pessoa.idade}}
+                <i>email: </i>{{pessoa.email }}
+                <a href="{% url 'deletarPessoa' pessoa.id %}">Deletar</a>
+                <a href="{% url 'atualizarPessoa' pessoa.id %}">Atualizar</a>
+            </li>
+        {% empty %}
+            <li>Lista vazia</li>
         {% endfor %}
-    </ul>
+        <a href="{% url 'criarPessoa' %}" style="color: rgb(10, 233, 10);">Criar pessoa</a>
+    </ol>
 </body>
 </html>
