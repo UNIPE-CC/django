@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Cachorros</title>
+</head>
+<body>
+    <h1>Cachorros cadastrados</h1>
+    {% for cachorro in cachorros %}
+    <ol>
+        <li>
+            <i>Nome: </i>{{cachorro.nome}}
+            <i>Raça: </i>{{cachorro.raca}}
+            <i>Instagram: </i>{{cachorro.instagram}}
+            <a href="{% url 'atualizarCachorro' cachorro.id %}">Atualizar</a>
+            <a href="{% url 'deletarCachorro' cachorro.id %}">Deletar</a>
+        </li>
+    </ol>
+    {% endfor %}
+    <a href="{% url 'criarCachorro' %}">Criar</a>
+</body>
+</html> 

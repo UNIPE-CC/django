@@ -7,7 +7,7 @@ class Cachorro(models.Model):
     nome = models.CharField(max_length=100)
     idade = models.IntegerField()
     raca = models.CharField(max_length=100)
-    instagran = models.CharField(max_length=40)
+    instagram = models.CharField(max_length=40)
 
     def __str__(self):
         return self.nome
